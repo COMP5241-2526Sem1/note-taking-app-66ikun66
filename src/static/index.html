@@ -12,11 +12,24 @@
             box-sizing: border-box;
         }
 
+        :root {
+            --primary: #667eea;
+            --secondary: #ffb347;
+            --accent: #ff5e62;
+            --success: #28a745;
+            --danger: #dc3545;
+            --info: #17a2b8;
+            --bg-gradient: linear-gradient(135deg, #667eea 0%, #ffb347 100%);
+            --sidebar-gradient: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            --editor-gradient: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
+        }
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: var(--bg-gradient);
             min-height: 100vh;
             color: #333;
+            background-attachment: fixed;
         }
 
         .container {
@@ -32,6 +45,10 @@
             text-align: center;
             margin-bottom: 30px;
             color: white;
+            background: linear-gradient(90deg, var(--primary), var(--accent), var(--secondary));
+            border-radius: 18px;
+            box-shadow: 0 4px 24px rgba(255,94,98,0.12);
+            padding: 24px 0 18px 0;
         }
 
         .header h1 {
@@ -53,56 +70,71 @@
         }
 
         .sidebar {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 15px;
+            background: var(--sidebar-gradient);
+            border-radius: 18px;
             padding: 25px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(255,179,71,0.15);
+            border: 2px solid var(--secondary);
             height: fit-content;
+            transition: box-shadow 0.3s;
+        }
+        .sidebar:hover {
+            box-shadow: 0 16px 40px rgba(255,94,98,0.18);
         }
 
         .note-editor {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 15px;
+            background: var(--editor-gradient);
+            border-radius: 18px;
             padding: 25px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(102,126,234,0.13);
+            border: 2px solid var(--primary);
             display: flex;
             flex-direction: column;
+            transition: box-shadow 0.3s;
+        }
+        .note-editor:focus-within {
+            box-shadow: 0 16px 40px rgba(23,162,184,0.18);
         }
 
         .search-box {
             width: 100%;
             padding: 12px 15px;
-            border: 2px solid #e1e5e9;
-            border-radius: 10px;
-            font-size: 14px;
+            border: 2px solid var(--primary);
+            border-radius: 12px;
+            font-size: 15px;
             margin-bottom: 20px;
-            transition: border-color 0.3s ease;
+            background: #fffbe7;
+            color: #333;
+            box-shadow: 0 2px 8px rgba(255,179,71,0.08);
+            transition: border-color 0.3s, box-shadow 0.3s;
         }
 
         .search-box:focus {
             outline: none;
-            border-color: #667eea;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 2px var(--accent);
         }
 
         .new-note-btn {
             width: 100%;
             padding: 12px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(90deg, var(--primary), var(--accent), var(--secondary));
             color: white;
             border: none;
-            border-radius: 10px;
-            font-size: 16px;
-            font-weight: 600;
+            border-radius: 12px;
+            font-size: 17px;
+            font-weight: 700;
             cursor: pointer;
             margin-bottom: 20px;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 4px 16px rgba(255,94,98,0.13);
+            letter-spacing: 1px;
+            transition: transform 0.2s, box-shadow 0.2s;
         }
 
         .new-note-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+            transform: translateY(-2px) scale(1.03);
+            box-shadow: 0 8px 24px rgba(255,179,71,0.22);
+            background: linear-gradient(90deg, var(--accent), var(--primary), var(--secondary));
         }
 
         .notes-list {
@@ -113,33 +145,37 @@
         .note-item {
             padding: 15px;
             border: 2px solid transparent;
-            border-radius: 10px;
+            border-radius: 12px;
             margin-bottom: 10px;
             cursor: pointer;
             transition: all 0.3s ease;
-            background: #f8f9fa;
+            background: linear-gradient(90deg, #f8f9fa 60%, #ffe0e3 100%);
+            box-shadow: 0 2px 8px rgba(255,94,98,0.06);
         }
 
         .note-item:hover {
-            border-color: #667eea;
-            transform: translateX(5px);
+            border-color: var(--accent);
+            transform: translateX(5px) scale(1.02);
+            box-shadow: 0 6px 18px rgba(255,94,98,0.13);
         }
 
         .note-item.active {
-            border-color: #667eea;
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            border-color: var(--primary);
+            background: linear-gradient(135deg, #e0e7ff 0%, #ffe0e3 100%);
+            box-shadow: 0 4px 16px rgba(102,126,234,0.13);
         }
 
         .note-title {
-            font-weight: 600;
-            font-size: 16px;
+            font-weight: 700;
+            font-size: 17px;
             margin-bottom: 5px;
-            color: #333;
+            color: var(--primary);
+            text-shadow: 1px 1px 0 #fffbe7;
         }
 
         .note-preview {
             font-size: 14px;
-            color: #666;
+            color: #ff5e62;
             line-height: 1.4;
             display: -webkit-box;
             -webkit-line-clamp: 2;
@@ -149,7 +185,7 @@
 
         .note-date {
             font-size: 12px;
-            color: #999;
+            color: var(--info);
             margin-top: 5px;
         }
 
@@ -162,7 +198,8 @@
 
         .editor-title {
             font-size: 1.5rem;
-            color: #333;
+            color: var(--accent);
+            text-shadow: 1px 1px 0 #fffbe7;
         }
 
         .editor-actions {
@@ -175,29 +212,32 @@
             border: none;
             border-radius: 8px;
             cursor: pointer;
-            font-size: 14px;
-            font-weight: 500;
-            transition: all 0.2s ease;
+            font-size: 15px;
+            font-weight: 600;
+            transition: all 0.2s;
+            box-shadow: 0 2px 8px rgba(23,162,184,0.08);
         }
 
         .btn-save {
-            background: #28a745;
+            background: linear-gradient(90deg, var(--success), var(--info));
             color: white;
         }
 
         .btn-save:hover {
-            background: #218838;
-            transform: translateY(-1px);
+            background: linear-gradient(90deg, var(--info), var(--success));
+            transform: translateY(-2px) scale(1.04);
+            box-shadow: 0 4px 16px rgba(23,162,184,0.18);
         }
 
         .btn-delete {
-            background: #dc3545;
+            background: linear-gradient(90deg, var(--danger), var(--accent));
             color: white;
         }
 
         .btn-delete:hover {
-            background: #c82333;
-            transform: translateY(-1px);
+            background: linear-gradient(90deg, var(--accent), var(--danger));
+            transform: translateY(-2px) scale(1.04);
+            box-shadow: 0 4px 16px rgba(255,94,98,0.18);
         }
 
         .form-group {
@@ -207,40 +247,48 @@
         .form-label {
             display: block;
             margin-bottom: 8px;
-            font-weight: 600;
-            color: #333;
+            font-weight: 700;
+            color: var(--primary);
         }
 
         .form-input {
             width: 100%;
             padding: 12px 15px;
-            border: 2px solid #e1e5e9;
-            border-radius: 10px;
+            border: 2px solid var(--primary);
+            border-radius: 12px;
             font-size: 16px;
-            transition: border-color 0.3s ease;
+            background: #fffbe7;
+            color: #333;
+            box-shadow: 0 2px 8px rgba(255,179,71,0.08);
+            transition: border-color 0.3s, box-shadow 0.3s;
         }
 
         .form-input:focus {
             outline: none;
-            border-color: #667eea;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 2px var(--accent);
         }
 
         .form-textarea {
             width: 100%;
             min-height: 300px;
             padding: 15px;
-            border: 2px solid #e1e5e9;
-            border-radius: 10px;
+            border: 2px solid var(--primary);
+            border-radius: 12px;
             font-size: 16px;
             font-family: inherit;
             resize: vertical;
-            transition: border-color 0.3s ease;
+            background: #fffbe7;
+            color: #333;
+            box-shadow: 0 2px 8px rgba(255,179,71,0.08);
+            transition: border-color 0.3s, box-shadow 0.3s;
             line-height: 1.6;
         }
 
         .form-textarea:focus {
             outline: none;
-            border-color: #667eea;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 2px var(--accent);
         }
 
         .empty-state {
@@ -266,21 +314,23 @@
         }
 
         .error {
-            background: #f8d7da;
+            background: linear-gradient(90deg, #f8d7da, #ffe0e3);
             color: #721c24;
             padding: 12px 15px;
-            border-radius: 8px;
+            border-radius: 10px;
             margin-bottom: 20px;
             border: 1px solid #f5c6cb;
+            box-shadow: 0 2px 8px rgba(255,94,98,0.08);
         }
 
         .success {
-            background: #d4edda;
+            background: linear-gradient(90deg, #d4edda, #c2e9fb);
             color: #155724;
             padding: 12px 15px;
-            border-radius: 8px;
+            border-radius: 10px;
             margin-bottom: 20px;
             border: 1px solid #c3e6cb;
+            box-shadow: 0 2px 8px rgba(40,167,69,0.08);
         }
 
         /* Responsive Design */
